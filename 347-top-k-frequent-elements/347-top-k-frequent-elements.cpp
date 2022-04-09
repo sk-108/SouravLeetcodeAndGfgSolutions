@@ -7,21 +7,18 @@ public:
             m[nums[i]]++;
         }
         vector<int>ans;
-        priority_queue<pair<int,int>>rmp;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>rmp;
         for(auto it=m.begin();it!=m.end();it++)
         {
             rmp.push(make_pair(it->second,it->first));
+            if(rmp.size()>k)rmp.pop();
         }
-        // for(auto it=rmp.begin();it!=rmp.end();it++)
-        // {
-        //     cout<<it->first<<" "<<it->second<<endl;
-        // }
        while(!rmp.empty())   {
-           if(k==0)break;
+           // if(k==0)break;
             pair<int,int>p = rmp.top();
             ans.push_back(p.second);
             rmp.pop();
-            k--;
+            // k--;
         }
         return ans;
     }
