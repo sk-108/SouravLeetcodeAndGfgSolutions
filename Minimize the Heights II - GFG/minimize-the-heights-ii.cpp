@@ -12,15 +12,20 @@ class Solution {
     int getMinDiff(int arr[], int n, int k) {
         // code here
         sort(arr,arr+n);
-        int diff=arr[n-1]-arr[0];
-        for(int i=1;i<n;i++)
-        {   if(arr[i]>=k){
-            int maxi=max(arr[i-1]+k,arr[n-1]-k);
-            int mini=min(arr[0]+k,arr[i]-k);
-            diff=min(maxi-mini,diff);
+        int smallest = arr[0]+k;
+        int largest = arr[n-1]-k;
+        int mi,ma;
+        int ans = arr[n-1]-arr[0];
+        
+        for(int i=0; i<n-1; i++){
+            
+            mi = min(smallest,arr[i+1]-k);
+            ma = max(largest, arr[i]+k);
+            if(mi<0) continue;
+            
+            ans = min(ans,ma-mi);
         }
-        }
-        return diff;
+        return ans;
     }
 };
 
