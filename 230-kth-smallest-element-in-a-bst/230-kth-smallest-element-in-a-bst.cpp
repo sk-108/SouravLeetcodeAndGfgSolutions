@@ -11,28 +11,22 @@
  */
 class Solution {
 public:
-    void find(TreeNode * root,int k,vector<int>&a)
+    int solve(TreeNode* root , int &k)
     {
-        if(root == NULL)
+        if(root == NULL)return 0;
+        int val = solve(root->left,k);
+        if(val)return val;
+        k--;
+        if(k == 0)
         {
-            return ;
+            return root->val;
         }
-        find(root->left,k,a);
-        a.push_back(root->val);
-        find(root->right,k,a);
+        int rval = solve(root->right,k);
+        if(rval)return rval;
+        return 0;
     }
+    
     int kthSmallest(TreeNode* root, int k) {
-        vector<int>ans;
-         find(root,k,ans);
-        for(int i=0;i<ans.size();i++)
-        {
-            k--;
-            if(k == 0)
-            {
-                return ans[i];
-            }
-        }
-        return ans[k-1];
-        
+        return solve(root,k);
     }
 };
