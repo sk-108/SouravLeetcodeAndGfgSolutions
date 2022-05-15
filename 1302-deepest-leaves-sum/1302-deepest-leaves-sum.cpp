@@ -11,43 +11,36 @@
  */
 class Solution {
 public:
-    int tall(TreeNode* root,int h)
-    {
-        if(root==NULL)return h;
-        int b = 1 + tall(root->left,h);
-        
-        int b2 = 1 + tall(root->right,h);
-        if(b>b2)
-        {
-            h = b;
-            return b;
-        }
-        else{
-            h = b2;
-            return b2;
-        }
-        
-    }
-    int summ(TreeNode * root, int& s,int height)
-    {
-        if(root == NULL)
-        {
-            return s;
-        }
-        if(height == 1)
-        {
-            s += root->val;
-            return s;
-        }
-        summ(root->left,s,height-1);
-        summ(root->right,s,height-1);
-        return s;
-    }
     int deepestLeavesSum(TreeNode* root) {
-        TreeNode * temp = root;
-        int height = tall(root,0);
-        int sum =0;
-        summ(root,sum,height);
+        queue<TreeNode*>q;
+        int sum = 0;
+        sum += root->val;
+        q.push(root);
+        int nodes = 1;
+        while(!q.empty())
+        {
+            sum = 0;
+            int no = nodes;
+            nodes=0;
+            for(int i=0;i<no;i++)
+            {
+                // if(q.empty())break;
+                TreeNode* tp = q.front();
+                sum += tp->val;
+                q.pop();  
+                if(tp->left)
+                {
+                    q.push(tp->left);
+                    nodes++;
+                }
+                if(tp->right)
+                {
+                    q.push(tp->right);
+                    nodes++;
+                }
+            }
+
+        }
         return sum;
     }
 };
