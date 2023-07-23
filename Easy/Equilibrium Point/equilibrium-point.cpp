@@ -18,10 +18,7 @@ class Solution{
             sum += a[i];
         }
         int sum2 = 0;
-        if(sum == sum2)
-        {
-            return 0;
-        }
+
         for(int i=0;i<n;i++)
         {
             sum -= a[i];
