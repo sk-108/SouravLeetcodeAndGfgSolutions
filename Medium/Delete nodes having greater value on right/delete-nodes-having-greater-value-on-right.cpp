@@ -46,36 +46,24 @@ struct Node
 class Solution
 {
     public:
-    Node* reverse(Node* head)
-    {
-        if(head == NULL || head->next == NULL)
-        {
-            return head;
-        }
-        else{
-            Node* rt = reverse(head->next);
-            head->next->next = head;
-            head->next = NULL;
-            return rt;
-        }
-    }
     Node *compute(Node *head)
     {
         // your code goes here
-        Node* r = reverse(head);
-        Node* ans = r;
-        while(ans->next != NULL)
+        
+        Node* temp = head;
+        while(temp->next != NULL)
         {
-            if(ans->data > ans->next->data)
+            if(temp->data < temp->next->data)
             {
-                ans->next = ans->next->next;
+                temp->data = temp->next->data;
+                temp->next = temp->next->next;
+                temp = head;
             }
             else{
-                ans = ans->next;
+                temp = temp->next;
             }
         }
-        Node* rt = reverse(r);
-        return rt;
+        return head;
     }
     
 };
